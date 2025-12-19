@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  customerId Int      @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  nationalId String
+  email      String   @unique
+  password   String
+  rentals    Rental[]
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model BungalowOwner {
+  ownerId    Int        @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  nationalId String
+  email      String     @unique
+  password   String
+  bungalows  Bungalow[]
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Bungalow {
+  bungalowId         Int           @id @default(autoincrement())
+  ownerId            Int
+  dailyPrice         Decimal
+  hasPool            Boolean
+  poolSize           Float?
+  roomCount          Int
+  hasInternet        Boolean
+  masterBedroomCount Int
+  bedCount           Int
+  bathroomCount      Int
+  latitude           Float
+  longitude          Float
+  
+  owner              BungalowOwner @relation(fields: [ownerId], references: [ownerId], onDelete: Cascade)
+  rentals            Rental[]
+  
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Rental {
+  rentalId   Int      @id @default(autoincrement())
+  bungalowId Int
+  customerId Int
+  startDate  DateTime
+  endDate    DateTime
+  
+  bungalow   Bungalow @relation(fields: [bungalowId], references: [bungalowId], onDelete: Cascade)
+  customer   Customer @relation(fields: [customerId], references: [customerId], onDelete: Cascade)
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
