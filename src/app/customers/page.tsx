@@ -92,12 +92,20 @@ export default function CustomersPage() {
                     <td className="px-6 py-4 text-sm text-gray-600">{customer.email}</td>
                     <td className="px-6 py-4 text-sm text-gray-600">{customer.nationalId}</td>
                     <td className="px-6 py-4 text-sm">
-                      <button
-                        onClick={() => deleteCustomer(customer.customerId)}
-                        className="text-red-600 hover:text-red-800 font-medium"
-                      >
-                        Sil
-                      </button>
+                      <div className="flex gap-2">
+                        <Link
+                          href={`/customers/${customer.customerId}/edit`}
+                          className="text-blue-600 hover:text-blue-800 font-medium"
+                        >
+                          Düzenle
+                        </Link>
+                        <button
+                          onClick={() => deleteCustomer(customer.customerId)}
+                          className="text-red-600 hover:text-red-800 font-medium"
+                        >
+                          Sil
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

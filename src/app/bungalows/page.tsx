@@ -100,12 +100,20 @@ export default function BungalowsPage() {
                     <strong>Havuz:</strong> {bungalow.hasPool ? "✅ Var" : "❌ Yok"}
                   </p>
                 </div>
-                <button
-                  onClick={() => deleteBungalow(bungalow.bungalowId)}
-                  className="w-full bg-red-50 hover:bg-red-100 text-red-600 py-2 rounded font-medium text-sm"
-                >
-                  Sil
-                </button>
+                <div className="flex gap-2">
+                  <Link
+                    href={`/bungalows/${bungalow.bungalowId}/edit`}
+                    className="flex-1 bg-yellow-50 hover:bg-yellow-100 text-yellow-600 py-2 rounded font-medium text-sm text-center"
+                  >
+                    Düzenle
+                  </Link>
+                  <button
+                    onClick={() => deleteBungalow(bungalow.bungalowId)}
+                    className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-2 rounded font-medium text-sm"
+                  >
+                    Sil
+                  </button>
+                </div>
               </div>
             ))}
           </div>

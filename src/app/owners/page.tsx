@@ -92,12 +92,20 @@ export default function OwnersPage() {
                     <td className="px-6 py-4 text-sm text-gray-600">{owner.email}</td>
                     <td className="px-6 py-4 text-sm text-gray-600">{owner.nationalId}</td>
                     <td className="px-6 py-4 text-sm">
-                      <button
-                        onClick={() => deleteOwner(owner.ownerId)}
-                        className="text-red-600 hover:text-red-800 font-medium"
-                      >
-                        Sil
-                      </button>
+                      <div className="flex gap-2">
+                        <Link
+                          href={`/owners/${owner.ownerId}/edit`}
+                          className="text-green-600 hover:text-green-800 font-medium"
+                        >
+                          Düzenle
+                        </Link>
+                        <button
+                          onClick={() => deleteOwner(owner.ownerId)}
+                          className="text-red-600 hover:text-red-800 font-medium"
+                        >
+                          Sil
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

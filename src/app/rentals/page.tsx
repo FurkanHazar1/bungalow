@@ -118,12 +118,20 @@ export default function RentalsPage() {
                       <strong>Toplam Fiyat:</strong> ₺{totalPrice.toFixed(2)}
                     </p>
                   </div>
-                  <button
-                    onClick={() => deleteRental(rental.rentalId)}
-                    className="w-full bg-red-50 hover:bg-red-100 text-red-600 py-2 rounded font-medium text-sm"
-                  >
-                    Sil
-                  </button>
+                  <div className="flex gap-2">
+                    <Link
+                      href={`/rentals/${rental.rentalId}/edit`}
+                      className="flex-1 bg-purple-50 hover:bg-purple-100 text-purple-600 py-2 rounded font-medium text-sm text-center"
+                    >
+                      Düzenle
+                    </Link>
+                    <button
+                      onClick={() => deleteRental(rental.rentalId)}
+                      className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-2 rounded font-medium text-sm"
+                    >
+                      Sil
+                    </button>
+                  </div>
                 </div>
               );
             })}
